@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Anaya's Amazon Finds</title>
+<meta name="description" content="Every find from Anaya's reels, by number. Amazon fashion under ₹999.">
+<meta name="theme-color" content="#5B1A2B">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏷️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Hind:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #5B1A2B;        /* maroon */
+    --ink-soft: #8A4A5A;
+    --page: #FBE9EC;       /* blush */
+    --tag: #FFFFFF;
+    --marigold: #F2A900;
+    --line: #EBC3CB;
+    --button-text: #FFFFFF;
+    --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+    --body: "Hind", "Noto Sans", "Segoe UI", system-ui, sans-serif;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #F7D6DA; --ink-soft: #CFA3AD; --page: #2A0E16; --tag: #3C1622;
+      --line: #5A2633; --button-text: #2A0E16;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #F7D6DA; --ink-soft: #CFA3AD; --page: #2A0E16; --tag: #3C1622;
+    --line: #5A2633; --button-text: #2A0E16;
+  }
+  *, *::before, *::after { box-sizing: inherit; }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  body {
+    margin: 0; background: var(--page); color: var(--ink);
+    font-family: var(--body); font-size: 17px; line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  main { max-width: 480px; margin: 0 auto; padding: 32px 18px 40px; }
+
+  /* Header */
+  header { text-align: center; margin-bottom: 28px; }
+  .avatar {
+    width: 96px; height: 96px; border-radius: 50%; margin: 0 auto 14px;
+    border: 3px solid var(--marigold); overflow: hidden; background: var(--tag);
+    display: grid; place-items: center;
+    font-family: var(--display); font-weight: 800; font-size: 40px;
+  }
+  .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  h1 {
+    font-family: var(--display); font-weight: 800; font-size: 34px;
+    line-height: 1.05; letter-spacing: -0.02em; margin: 0 0 8px;
+  }
+  .bio { margin: 0 auto; max-width: 34ch; color: var(--ink-soft); }
+  .ai-note {
+    display: inline-block; margin-top: 12px; padding: 3px 12px;
+    border: 1.5px solid var(--ink); border-radius: 999px; font-size: 14px; font-weight: 500;
+  }
+
+  /* Find-number lookup: the big tag */
+  .lookup {
+    position: relative; background: var(--ink); color: var(--page);
+    border-radius: 14px 14px 14px 14px; padding: 18px 20px 20px 54px; margin-bottom: 28px;
+  }
+  .lookup::before { /* punched tag hole */
+    content: ""; position: absolute; left: 20px; top: 50%; width: 16px; height: 16px;
+    margin-top: -8px; border-radius: 50%; background: var(--page);
+  }
+  .lookup label { display: block; font-weight: 500; font-size: 15px; margin-bottom: 6px; }
+  .lookup input {
+    width: 100%; border: 0; border-bottom: 2px solid var(--marigold); background: transparent;
+    color: var(--page); font-family: var(--display); font-weight: 700; font-size: 30px;
+    padding: 2px 0 4px; outline: none;
+  }
+  .lookup input::placeholder { color: var(--page); opacity: 0.45; }
+  .lookup input:focus-visible { border-bottom-color: var(--page); }
+
+  /* Filters */
+  .filters { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; margin-bottom: 20px; scrollbar-width: none; }
+  .filters::-webkit-scrollbar { display: none; }
+  .chip {
+    flex: none; border: 1.5px solid var(--ink); background: transparent; color: var(--ink);
+    font: 500 15px var(--body); padding: 6px 14px; border-radius: 999px; cursor: pointer;
+  }
+  .chip[aria-pressed="true"] { background: var(--ink); color: var(--page); }
+  .chip:focus-visible, .shop:focus-visible, .ig:focus-visible { outline: 3px solid var(--marigold); outline-offset: 2px; }
+
+  /* Reel groups */
+  .reel { margin-bottom: 30px; }
+  .reel h2 {
+    font-family: var(--display); font-weight: 700; font-size: 22px; margin: 0 0 2px;
+    letter-spacing: -0.01em;
+  }
+  .reel .when { color: var(--ink-soft); font-size: 14px; margin: 0 0 12px; }
+
+  /* Find tags */
+  .find {
+    display: grid; grid-template-columns: 64px 1fr; gap: 0 14px; align-items: center;
+    background: var(--tag); border: 1.5px solid var(--line); border-radius: 12px;
+    padding: 14px; margin-bottom: 10px; scroll-margin-top: 16px;
+  }
+  .find.hit { border-color: var(--marigold); box-shadow: 0 0 0 3px var(--marigold); }
+  .num {
+    grid-row: span 2; align-self: stretch; display: grid; place-items: center;
+    border-right: 1.5px dashed var(--line); padding-right: 12px;
+    font-family: var(--display); font-weight: 800; font-size: 22px; line-height: 1;
+  }
+  .num small { display: block; font: 500 12px var(--body); color: var(--ink-soft); margin-bottom: 2px; text-align: center; }
+  .find h3 { margin: 0; font-size: 17px; font-weight: 600; line-height: 1.3; }
+  .find p { margin: 2px 0 10px; font-size: 14px; color: var(--ink-soft); }
+  .shop {
+    grid-column: 2; justify-self: start; display: inline-block; text-decoration: none;
+    background: var(--ink); color: var(--button-text); font-weight: 600; font-size: 15px;
+    padding: 8px 16px; border-radius: 8px;
+  }
+  .find.gone .shop { background: transparent; color: var(--ink-soft); border: 1.5px solid var(--line); pointer-events: none; }
+
+  .empty { text-align: center; padding: 24px 12px; color: var(--ink-soft); }
+  .empty strong { color: var(--ink); }
+
+  footer { text-align: center; font-size: 14px; color: var(--ink-soft); border-top: 1.5px solid var(--line); padding-top: 18px; }
+  footer p { margin: 0 0 8px; }
+  .ig { color: var(--ink); font-weight: 600; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .find.hit { animation: pulse 1.2s ease-out 1; }
+    @keyframes pulse { from { box-shadow: 0 0 0 10px rgba(242,169,0,0.35); } to { box-shadow: 0 0 0 3px var(--marigold); } }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="avatar" id="avatar">A</div>
+    <h1>Anaya's Amazon Finds</h1>
+    <p class="bio">Fashion finds under ₹999, checked for fabric and stitching before they make it into a reel.</p>
+    <span class="ai-note">I'm an AI-generated creator</span>
+  </header>
+
+  <form class="lookup" role="search" onsubmit="return false">
+    <label for="q">Type the find number from the reel</label>
+    <input id="q" type="search" inputmode="numeric" placeholder="e.g. 003" autocomplete="off">
+  </form>
+
+  <nav class="filters" id="filters" aria-label="Filter by category"></nav>
+
+  <section id="list" aria-live="polite"></section>
+
+  <footer>
+    <p>As an Amazon Associate I earn from qualifying purchases.</p>
+    <p>Prices change often on Amazon, so check the listing before you buy.</p>
+    <p><a class="ig" id="ig" href="#" target="_blank" rel="noopener">Follow Anaya on Instagram</a></p>
+  </footer>
+</main>
+
+<script>
+/* ============================================================
+   EDIT THIS SECTION ONLY
+   1. Put your Instagram handle below.
+   2. Add a photo named avatar.jpg next to this file (optional).
+   3. For every product, paste your SiteStripe short link (amzn.to/...)
+      into "link". The links below are plain product links and
+      will NOT earn commission until you replace them.
+   4. Newest reel goes at the TOP of REELS.
+   5. Set "gone: true" on a find that is out of stock (keeps its number).
+   ============================================================ */
+const INSTAGRAM_HANDLE = "anaya.finds";
+
+const REELS = [
+  {
+    title: "Diwali edit: 4 finds under ₹700",
+    when: "October 2026",
+    finds: [
+      { id: "001", name: "Maroon printed Anarkali set with dupatta", brand: "KLOSIA", category: "Kurta sets",
+        note: "Viscose, so pick a lining-friendly inner.", link: "https://www.amazon.in/dp/B0FRFXX2C3" },
+      { id: "002", name: "Printed straight kurta, pant and dupatta set", brand: "KLOSIA", category: "Kurta sets",
+        note: "Easy office-to-puja option.", link: "https://www.amazon.in/dp/B0GPQC7NXZ" },
+      { id: "003", name: "Printed Anarkali kurta and palazzo set", brand: "Nermosa", category: "Kurta sets",
+        note: "The flare is the whole point. Size up if between sizes.", link: "https://www.amazon.in/dp/B0H8SGF3SZ" },
+      { id: "004", name: "Solid V-neck A-line maxi dress", brand: "Shasmi", category: "Dresses",
+        note: "Works for Diwali brunch with a statement earring.", link: "https://www.amazon.in/dp/B0FLK4B4FL" }
+    ]
+  }
+];
+/* ============================ END OF EDITABLE SECTION ============================ */
+
+const list = document.getElementById("list");
+const q = document.getElementById("q");
+const filtersEl = document.getElementById("filters");
+let activeCategory = "All";
+
+// Avatar: use avatar.jpg if present, otherwise keep the initial.
+(() => {
+  const img = new Image();
+  img.alt = "Anaya";
+  img.onload = () => { const a = document.getElementById("avatar"); a.textContent = ""; a.appendChild(img); };
+  img.src = "avatar.jpg";
+})();
+
+const ig = document.getElementById("ig");
+ig.href = "https://www.instagram.com/" + INSTAGRAM_HANDLE + "/";
+ig.textContent = "Follow @" + INSTAGRAM_HANDLE + " on Instagram";
+
+const categories = ["All", ...new Set(REELS.flatMap(r => r.finds.map(f => f.category)))];
+categories.forEach(c => {
+  const b = document.createElement("button");
+  b.type = "button"; b.className = "chip"; b.textContent = c;
+  b.setAttribute("aria-pressed", c === activeCategory ? "true" : "false");
+  b.addEventListener("click", () => {
+    activeCategory = c;
+    filtersEl.querySelectorAll(".chip").forEach(x => x.setAttribute("aria-pressed", x === b ? "true" : "false"));
+    render();
+  });
+  filtersEl.appendChild(b);
+});
+
+const norm = s => String(s).toLowerCase().trim();
+const asNumber = s => { const d = String(s).replace(/\D/g, ""); return d ? d.padStart(3, "0") : ""; };
+
+function matches(f, term) {
+  if (!term) return true;
+  const n = asNumber(term);
+  if (/^\s*#?\d+\s*$/.test(term)) return f.id === n;
+  const t = norm(term);
+  return norm(f.name).includes(t) || norm(f.brand).includes(t) || norm(f.category).includes(t);
+}
+
+function el(tag, cls, text) { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+
+function render(highlightId) {
+  const term = q.value;
+  list.innerHTML = "";
+  let shown = 0;
+  REELS.forEach(reel => {
+    const finds = reel.finds.filter(f => (activeCategory === "All" || f.category === activeCategory) && matches(f, term));
+    if (!finds.length) return;
+    const sec = el("div", "reel");
+    sec.appendChild(el("h2", null, reel.title));
+    sec.appendChild(el("p", "when", reel.when));
+    finds.forEach(f => {
+      shown++;
+      const card = el("article", "find" + (f.gone ? " gone" : ""));
+      card.id = "find-" + f.id;
+      const num = el("div", "num");
+      num.appendChild(el("small", null, "Find"));
+      num.appendChild(document.createTextNode(f.id));
+      card.appendChild(num);
+      const h = el("h3", null, f.name);
+      card.appendChild(h);
+      const wrap = el("div");
+      wrap.appendChild(el("p", null, f.brand + (f.note ? ". " + f.note : "")));
+      const a = el("a", "shop", f.gone ? "Out of stock" : "Shop on Amazon");
+      a.href = f.link; a.target = "_blank"; a.rel = "sponsored nofollow noopener";
+      wrap.appendChild(a);
+      card.appendChild(wrap);
+      if (highlightId && f.id === highlightId) card.classList.add("hit");
+      sec.appendChild(card);
+    });
+    list.appendChild(sec);
+  });
+  if (!shown) {
+    const e = el("div", "empty");
+    const n = asNumber(term);
+    if (n && /^\s*#?\d+\s*$/.test(term)) {
+      e.append("There's no find ");
+      e.appendChild(el("strong", null, "#" + n));
+      e.append(" yet. Check the number on the reel, or clear the box to see every find.");
+    } else {
+      e.textContent = "Nothing matches that. Try a find number, a brand, or clear the box to see every find.";
+    }
+    list.appendChild(e);
+  }
+  if (highlightId) {
+    const t = document.getElementById("find-" + highlightId);
+    if (t) t.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "center" });
+  }
+}
+
+q.addEventListener("input", () => {
+  const isNum = /^\s*#?\d+\s*$/.test(q.value);
+  const id = isNum ? asNumber(q.value) : "";
+  if (isNum) history.replaceState(null, "", "#" + id); else if (!q.value) history.replaceState(null, "", location.pathname);
+  render(id);
+});
+
+// Deep link: yoursite/#003 opens straight on find 003.
+function fromHash() {
+  const id = asNumber(location.hash);
+  if (id) { q.value = id; render(id); } else render();
+}
+window.addEventListener("hashchange", fromHash);
+fromHash();
+</script>
+</body>
+</html>
