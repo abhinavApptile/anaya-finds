@@ -38,7 +38,7 @@ For routine content changes, edit only this block. Do not touch the CSS or rende
 2. Check for duplicate IDs and that IDs are sequential with no reuse.
 3. Show me a short summary of what changed (IDs added or edited, links replaced, warnings).
 4. Commit with a clear message, e.g. "Add reel: Office week, finds #005–#008" or "Swap affiliate links for #001–#004".
-5. Ask me before running `git push`, since pushing publishes the change live.
+5. Push to `main` right after committing (`git push`); I don't need to be asked. Pushing publishes the change live.
 
 ## Style
 Keep explanations short. If a request would break one of the rules above, say which rule and suggest the closest compliant option instead of doing it.
